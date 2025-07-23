@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>b-dress - השכרת שמלות ותחתיות</title>
+  <link href="https://fonts.googleapis.com/css2?family=Varela+Round:wght@400;700&family=Heebo:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-gold: #b88a44;
+      --primary-pink: #e89fc8; /* גוון ורוד חדש */
+      --primary-white: #fff5f8;
+      --secondary-pink: #e89fc8; /* גוון ורוד מהלוגו */
+      --secondary-brown: #6b4e3d;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Varela Round', 'Heebo', Arial, sans-serif;
+      background: linear-gradient(135deg, var(--primary-white) 0%, #fff 50%, #fef7fa 100%);
+      margin: 0;
+      direction: rtl;
+      color: var(--secondary-brown);
+      min-height: 100vh;
+    }
+    header {
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(6px);
+      box-shadow: 0 4px 24px rgba(231, 182, 209, 0.15);
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(184, 138, 68, 0.1);
+    }
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .logo {
+      height: 70px;
+      width: 70px;
+      border-radius: 20px;
+      box-shadow: 0 4px 16px rgba(184, 138, 68, 0.2);
+      background: linear-gradient(135deg, #fff 0%, #fef7fa 100%);
+      padding: 6px;
+      object-fit: cover;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .brand-name {
+      font-size: 2.2rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--primary-gold) 0%, var(--secondary-pink) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 2px;
+      margin: 0;
+    }
+    nav {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    nav .menu-group {
+      position: relative;
+    }
+    nav .menu-group .menu-link {
+      color: var(--secondary-brown);
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 500;
+      padding: 0.8rem 1.5rem;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+      background: rgba(255,255,255,0.8);
+      border: 1px solid rgba(184, 138, 68, 0.1);
+      letter-spacing: 0.5px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    nav .menu-group .menu-link.active,
+    nav .menu-group .menu-link:hover {
+      background: linear-gradient(135deg, #f8e1ef 0%, #fff 100%);
+      color: var(--secondary-pink);
+      box-shadow: 0 4px 16px rgba(184, 138, 68, 0.2);
+      transform: translateY(-2px);
+      border-color: var(--primary-gold);
+    }
+    nav .menu-group .submenu {
+      display: none;
+      position: absolute;
+      top: 48px;
+      right: 0;
+      background: #fff;
+      box-shadow: 0 8px 32px rgba(184, 138, 68, 0.10);
+      border-radius: 18px;
+      min-width: 180px;
+      z-index: 10;
+      padding: 0.5rem 0;
+    }
+    nav .menu-group:hover .submenu,
+    nav .menu-group .menu-link:focus + .submenu {
+      display: block;
+    }
+    nav .menu-group .submenu a {
+      display: block;
+      color: var(--secondary-brown);
+      text-decoration: none;
+      padding: 0.7rem 1.2rem;
+      font-size: 1rem;
+      border-radius: 12px;
+      background: none;
+      border: none;
+      transition: background 0.2s, color 0.2s;
+      cursor: pointer;
+    }
+    nav .menu-group .submenu a:hover,
+    nav .menu-group .submenu a.active {
+      background: linear-gradient(90deg, #f8e1ef 0%, #fff 100%);
+      color: var(--secondary-pink);
+    }
+    main {
+      padding: 3rem 2rem 2rem 2rem;
+      max-width: 1400px;
+      margin: auto;
+      min-height: calc(100vh - 200px);
+    }
+    h1, h2 {
+      color: var(--secondary-pink);
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      letter-spacing: 1px;
+      text-align: center;
+      font-weight: 700;
+    }
+    h2 { font-size: 2rem; margin-bottom: 2rem; }
+    .hero-section {
+      text-align: center;
+      padding: 3rem 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(248, 225, 239, 0.3) 100%);
+      border-radius: 30px;
+      margin-bottom: 3rem;
+      box-shadow: 0 8px 32px rgba(184, 138, 68, 0.1);
+      border: 1px solid rgba(184, 138, 68, 0.1);
+    }
+    .hero-section h1 {
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, var(--secondary-pink) 0%, var(--primary-gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-section p {
+      font-size: 1.3rem;
+      color: var(--secondary-brown);
+      max-width: 700px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.8;
+    }
+    /* קטלוג */
+    .catalog {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.5rem;
+      margin-top: 2rem;
+    }
+    .catalog-card {
+      background: linear-gradient(135deg, #fff 0%, #fef7fa 100%);
+      border-radius: 25px;
+      box-shadow: 0 8px 32px rgba(184, 138, 68, 0.15);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(184, 138, 68, 0.1);
+      min-height: 450px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .catalog-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 20px;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 16px rgba(184, 138, 68, 0.2);
+      transition: transform 0.3s ease;
+    }
+    .catalog-card h3 {
+      color: var(--secondary-pink);
+      font-size: 1.4rem;
+      margin: 0 0 1rem;
+      font-weight: 600;
+    }
+    .catalog-card p {
+      color: var(--secondary-brown);
+      margin: 0.5rem 0;
+      font-size: 1.1rem;
+    }
+    .price {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary-gold);
+      margin: 1rem 0;
+    }
+    .btn-gold {
+      background: linear-gradient(135deg, var(--primary-gold) 0%, var(--secondary-pink) 100%);
+      color: #fff;
+      border: none;
+      border-radius: 25px;
+      padding: 1rem 2.5rem;
+      font-size: 1.1rem;
+      cursor: pointer;
+      margin-top: 1.5rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 16px rgba(184, 138, 68, 0.3);
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+    .btn-gold:hover {
+      background: linear-gradient(135deg, var(--secondary-pink) 0%, var(--primary-gold) 100%);
+      box-shadow: 0 8px 24px rgba(184, 138, 68, 0.4);
+      transform: translateY(-2px);
+    }
+    .hide { display: none; }
+    .show { animation: fadeIn 0.5s ease; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    footer {
+      text-align: center;
+      color: var(--primary-gold);
+      margin: 3rem 0 2rem;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+      padding: 2rem;
+      background: linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(248, 225, 239, 0.3) 100%);
+      border-radius: 20px;
+      margin: 3rem 2rem 2rem;
+    }
+    /* לוח בקרה */
+    .dashboard-panel {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.8);
+      z-index: 1000;
+      overflow-y: auto;
+    }
+    .dashboard-content {
+      background: linear-gradient(135deg, #fff 0%, #fef7fa 100%);
+      max-width: 900px;
+      margin: 2rem auto;
+      border-radius: 25px;
+      padding: 2.5rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      max-height: 95vh;
+      overflow-y: auto;
+    }
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid rgba(184, 138, 68, 0.2);
+    }
+    .dashboard-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .dashboard-tab {
+      padding: 0.8rem 1.5rem;
+      background: rgba(255,255,255,0.8);
+      border: 1px solid rgba(184, 138, 68, 0.2);
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+    .dashboard-tab.active {
+      background: linear-gradient(135deg, var(--primary-gold) 0%, var(--secondary-pink) 100%);
+      color: white;
+      border-color: var(--primary-gold);
+    }
+    .dashboard-section { display: none; }
+    .dashboard-section.active { display: block; animation: fadeIn 0.3s ease; }
+    .edit-form { display: grid; gap: 1rem; margin-bottom: 2rem; }
+    .edit-form input, .edit-form select, .edit-form textarea {
+      padding: 0.8rem;
+      border-radius: 15px;
+      border: 2px solid rgba(184, 138, 68, 0.2);
+      font-size: 1rem;
+      background: rgba(255,255,255,0.8);
+    }
+    .edit-form input:focus, .edit-form select:focus, .edit-form textarea:focus {
+      outline: none;
+      border-color: var(--primary-gold);
+      background: white;
+    }
+    .dashboard-toggle {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: linear-gradient(135deg, var(--primary-gold) 0%, var(--secondary-pink) 100%);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 1.7rem;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(184, 138, 68, 0.3);
+      transition: all 0.3s ease;
+      z-index: 999;
+    }
+    .dashboard-toggle:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(184, 138, 68, 0.4);
+    }
+    /* מכירות */
+    .sale-catalog {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.5rem;
+      margin-top: 2rem;
+    }
+    .sale-card {
+      background: linear-gradient(135deg, #fff 0%, #fef7fa 100%);
+      border-radius: 25px;
+      box-shadow: 0 8px 32px rgba(184, 138, 68, 0.15);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(184, 138, 68, 0.1);
+      min-height: 450px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .sale-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 20px;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 16px rgba(184, 138, 68, 0.2);
+      transition: transform 0.3s ease;
+    }
+    .cart-btn {
+      background: linear-gradient(135deg, var(--primary-gold) 0%, var(--secondary-pink) 100%);
+      color: #fff;
+      border: none;
+      border-radius: 25px;
+      padding: 1rem;
+      font-size: 1.1rem;
+      cursor: pointer;
+      margin-top: 1.5rem;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      letter-spacing: 1px;
+    }
+    .cart-btn:hover {
+      background: linear-gradient(135deg, var(--secondary-pink) 0%, var(--primary-gold) 100%);
+    }
+    .cart-container {
+      background: #fff;
+      box-shadow: 0 8px 32px rgba(184, 138, 68, 0.10);
+      border-radius: 20px;
+      padding: 2rem;
+      max-width: 500px;
+      margin: 2rem auto;
+    }
+    .cart-list { margin-bottom: 2rem; }
+    .cart-list-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+    }
+    .cart-list-item img { width: 70px; height: 70px; object-fit: cover; border-radius: 10px; }
+    .cart-total { font-weight: 700; color: var(--primary-gold); font-size: 1.2rem; margin-bottom: 1rem;}
+    .cart-actions { display: flex; gap: 1rem; }
+    .cart-pay-btn {
+      background: linear-gradient(135deg, var(--primary-gold) 0%, var(--secondary-pink) 100%);
+      color: #fff;
+      border: none;
+      border-radius: 15px;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    /* יומן */
+    .calendar-section {
+      background: linear-gradient(135deg, #fff 0%, #fef7fa 100%);
+      border-radius: 25px;
+      box-shadow: 0 8px 32px rgba(184, 138, 68, 0.15);
+      padding: 2rem 1.5rem;
+      margin: 2rem auto;
+      max-width: 550px;
+      display: none;
+    }
+    .calendar-section.show { display: block; animation: fadeIn 0.5s ease; }
+    /* מדיה */
+    @media (max-width: 768px) {
+      main { padding: 2rem 1rem 1rem 1rem; }
+      header { flex-direction: column; gap: 1.5rem; padding: 1rem; }
+      nav { flex-wrap: wrap; justify-content: center; gap: 0.3rem; }
+      .brand-name { font-size: 1.8rem; }
+      .logo { height: 60px; width: 60px; }
+      .catalog, .sale-catalog { grid-template-columns: 1fr; gap: 2rem; }
+      .catalog-card, .sale-card { width: 100%; max-width: 400px; margin: 0 auto; }
+      .cart-container { padding: 1rem; }
+    }
+    @media (max-width: 480px) {
+      .dashboard-content, .calendar-section { padding: 1rem; }
+      .btn-gold, .cart-btn, .cart-pay-btn { padding: 0.8rem 1.2rem; font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <img src="image1" alt="b-dress לוגו" class="logo" />
+      <h1 class="brand-name">b-dress</h1>
+    </div>
+    <nav>
+      <div class="menu-group">
+        <span class="menu-link" onclick="showPage('home', this)">דף הבית</span>
+      </div>
+      <div class="menu-group">
+        <span class="menu-link" tabindex="0">השכרת שמלות</span>
+        <div class="submenu">
+          <a href="#" onclick="showPage('catalog-women', this)">קטלוג נשים</a>
+          <a href="#" onclick="showPage('catalog-teens', this)">קטלוג נערות</a>
+          <a href="#" onclick="showPage('catalog-girls', this)">קטלוג ילדות</a>
+        </div>
+      </div>
+      <div class="menu-group">
+        <span class="menu-link" onclick="showPage('sales', this)">מחירות</span>
+      </div>
+      <div class="menu-group">
+        <span class="menu-link" onclick="showPage('petticoats', this)">תחתיות מנפחות</span>
+      </div>
+      <div class="menu-group">
+        <span class="menu-link" onclick="showPage('contact', this)">צור קשר</span>
+      </div>
+      <div class="menu-group">
+        <span class="menu-link" onclick="showPage('about', this)">אודות</span>
+      </div>
+      <div class="menu-group">
+        <span class="menu-link" onclick="showDashboard()">לוח בקרה</span>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <!-- דף הבית -->
+    <section id="home" class="show">
+      <div class="hero-section">
+        <h1>ברוכה הבאה ל-b-dress!</h1>
+        <p>
+          האתר החרדי להשכרת שמלות ותחתיות לאירועים.<br>
+          מצאי את שמלת חלומותיך להשכרה, למכירה או תחתיות מנפחות, ונהלי את העסק שלך בלוח הבקרה המתקדם.
+        </p>
+        <div style="margin:2rem 0;">
+          <h3 style="color:var(--primary-gold);margin-bottom:0.5rem;">פרטי התקשרות:</h3>
+          <div style="font-size:1.15em;">
+            <b>טלפונים:</b> <a href="tel:0526046636" style="color:var(--secondary-pink);">052-6046636</a>
+            &nbsp;|&nbsp;
+            <a href="tel:0527673518" style="color:var(--secondary-pink);">052-7673518</a><br>
+            <b>אימייל:</b> <a href="mailto:bdress580@gmail.com" style="color:var(--secondary-pink);">bdress580@gmail.com</a><br>
+            <b>שם העסק:</b> b-dress
+          </div>
+        </div>
+        <button class="btn-gold" onclick="showPage('catalog-women')">
+          לקטלוג שמלות נשים
+        </button>
+      </div>
+    </section>
+    <!-- קטלוג נשים -->
+    <section id="catalog-women" class="hide">
+      <h2>קטלוג שמלות נשים</h2>
+      <div class="catalog" id="catalog-list-women"></div>
+    </section>
+    <!-- קטלוג נערות -->
+    <section id="catalog-teens" class="hide">
+      <h2>קטלוג שמלות נערות</h2>
+      <div class="catalog" id="catalog-list-teens"></div>
+    </section>
+    <!-- קטלוג ילדות -->
+    <section id="catalog-girls" class="hide">
+      <h2>קטלוג שמלות ילדות</h2>
+      <div class="catalog" id="catalog-list-girls"></div>
+    </section>
+    <!-- מחירות -->
+    <section id="sales" class="hide">
+      <h2>מחירות</h2>
+      <div class="sale-catalog" id="sale-list"></div>
+      <div class="cart-container hide" id="cart-container"></div>
+    </section>
+    <!-- תחתיות מנפחות -->
+    <section id="petticoats" class="hide">
+      <h2>תחתיות מנפחות</h2>
+      <div class="hero-section">
+        <p>
+          <b>תפקיד התחתית למראה מושלם של השמלה</b><br>
+          ללא תחתית, שמלה יכולה לאבד את היופי שלה; תחתית מנפחת הופכת כל שמלה למושלמת, אלגנטית ומלאת חן.<br>
+          לאורך ההיסטוריה נשים נהגו להקפיד על תחתיות מסוגים שונים.<br>
+          בסטודיו שלנו תמצאי מגוון רחב של תחתיות מנפחות: עם חישוק, מבד, בהתאמה אישית לכל שמלה ולכל גיל.<br>
+          הצוות שלנו יתאים לך את התחתית המושלמת לכל שמלה!
+        </p>
+        <button class="btn-gold" onclick="showCalendar()">לקביעת תור</button>
+      </div>
+      <div class="catalog" id="petticoat-list"></div>
+    </section>
+    <!-- יומן תורים (מוסתר מהגולשים, יוצג רק בלחיצה על כפתור) -->
+    <section id="calendar" class="calendar-section">
+      <h2>יומן תורים</h2>
+      <form onsubmit="bookAppointment(event)">
+        <div class="edit-form">
+          <input id="calendar-name" placeholder="שם מלא" required />
+          <input id="calendar-phone" placeholder="טלפון" required />
+          <input id="calendar-qty" type="number" min="1" placeholder="כמה תחתיות?" required />
+          <input id="calendar-age" placeholder="גילאים" required />
+          <textarea id="calendar-note" placeholder="הערות נוספות"></textarea>
+          <button class="btn-gold" type="submit">שלח בקשה</button>
+        </div>
+      </form>
+    </section>
+    <!-- צור קשר -->
+    <section id="contact" class="hide">
+      <h2>צור קשר</h2>
+      <form onsubmit="sendContact(event)">
+        <div class="edit-form">
+          <input id="contact-name" placeholder="שם מלא" required />
+          <input id="contact-email" placeholder="אימייל" required type="email" />
+          <textarea id="contact-message" placeholder="ההודעה שלך" required style="min-height:120px;resize:vertical;"></textarea>
+          <button class="btn-gold" type="submit" id="contact-submit">שלח הודעה</button>
+        </div>
+      </form>
+      <div style="margin-top:2rem;text-align:center;font-size:1.15em;">
+        <b>טלפונים:</b> <a href="tel:0526046636" style="color:var(--secondary-pink);">052-6046636</a>
+        &nbsp;|&nbsp;
+        <a href="tel:0527673518" style="color:var(--secondary-pink);">052-7673518</a><br>
+        <b>אימייל:</b> <a href="mailto:bdress580@gmail.com" style="color:var(--secondary-pink);">bdress580@gmail.com</a><br>
+        <b>שם העסק:</b> b-dress
+      </div>
+    </section>
+    <!-- אודות -->
+    <section id="about" class="hide">
+      <h2>אודות האתר</h2>
+      <div class="hero-section" style="background:linear-gradient(135deg, #fff 60%, #fce0ef 100%); color:var(--secondary-brown)">
+        <p style="font-size:1.3em;">
+          <b>b-dress</b> הוא אתר ייחודי לנשים ולילדות, להשכרת שמלות, תחתיות מנפחות, ומכירת שמלות יד שנייה וחדשות.<br><br>
+          האתר נבנה מתוך אהבה לאופנה, לנראות נשית וצנועה, ומתוך רצון להעניק לכל אחת חוויה אישית, נוחה ומרגשת.<br><br>
+          באתר תמצאי קטלוגים מגוונים, מערכת מכירות מתקדמת, מערכת יומן תורים, ולוח בקרה אישי המאפשר לך לנהל את העסק שלך בקלות.<br>
+          כל המידע שלך נגיש, ניתן לעדכון ושינוי, והעיצוב כולו בהשראת צבעי הלוגו: זהב, ורוד, ונגיעות בהירות.<br><br>
+          <b>החזון שלנו:</b> להנגיש שמלות יפות, איכותיות וייחודיות לכל אחת, ולאפשר התאמה אישית לכל אירוע ולכל סגנון.<br>
+          <u>פנו אלינו לכל שאלה, בקשה או רעיון – נשמח ללוות אותך בדרך לשמלה המושלמת!</u>
+        </p>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <span id="footer-text">כל הזכויות שמורות &copy; 2024 b-dress</span>
+  </footer>
+  <!-- כפתור לוח בקרה -->
+  <button class="dashboard-toggle" onclick="showDashboard()" title="לוח בקרה">⚙️</button>
+  <!-- לוח בקרה -->
+  <div class="dashboard-panel" id="dashboardPanel">
+    <div class="dashboard-content">
+      <div class="dashboard-header">
+        <h2>לוח בקרה b-dress</h2>
+        <button class="btn-gold" onclick="hideDashboard()">סגור</button>
+      </div>
+      <div id="dashboard-login">
+        <p>הכניסי את הסיסמה:</p>
+        <input type="password" id="dashboard-password" placeholder="סיסמה" />
+        <button class="btn-gold" onclick="dashboardLogin()">כניסה</button>
+      </div>
+      <div id="dashboard-tabs" style="display:none;">
+        <div class="dashboard-tabs">
+          <div class="dashboard-tab active" onclick="showDashboardTab('catalog')">קטלוגים</div>
+          <div class="dashboard-tab" onclick="showDashboardTab('sales')">מכירות</div>
+          <div class="dashboard-tab" onclick="showDashboardTab('petticoats')">תחתיות</div>
+          <div class="dashboard-tab" onclick="showDashboardTab('calendar')">יומן תורים</div>
+          <div class="dashboard-tab" onclick="showDashboardTab('settings')">הגדרות</div>
+        </div>
+        <div class="dashboard-section active" id="dashboard-catalog">
+          <h3>ניהול קטלוג שמלות</h3>
+          <div class="edit-form">
+            <select id="edit-category">
+              <option value="women">נשים</option>
+              <option value="girls">ילדות</option>
+              <option value="teens">נערות</option>
+            </select>
+            <button class="btn-gold" onclick="loadCategoryDresses()">טען קטלוג</button>
+          </div>
+          <div id="dresses-list"></div>
+        </div>
+        <div class="dashboard-section" id="dashboard-sales">
+          <h3>ניהול קטלוג מחירות</h3>
+          <div id="sales-list"></div>
+          <button class="btn-gold" onclick="addSaleItem()">הוספת שמלה למכירה</button>
+        </div>
+        <div class="dashboard-section" id="dashboard-petticoats">
+          <h3>ניהול קטלוג תחתיות</h3>
+          <div id="petticoats-list"></div>
+          <button class="btn-gold" onclick="addPetticoat()">הוספת תחתית</button>
+        </div>
+        <div class="dashboard-section" id="dashboard-calendar">
+          <h3>ניהול יומן תורים</h3>
+          <div id="appointments-list"></div>
+        </div>
+        <div class="dashboard-section" id="dashboard-settings">
+          <h3>הגדרות האתר</h3>
+          <div class="edit-form">
+            <label>שם העסק:</label>
+            <input id="site-name" value="b-dress" />
+            <label>תיאור העסק:</label>
+            <textarea id="site-description" rows="3">האתר החרדי להשכרת שמלות ותחתיות לאירועים</textarea>
+            <label>אימייל:</label>
+            <input id="contact-email-admin" type="email" placeholder="bdress580@gmail.com" />
+            <label>טלפון:</label>
+            <input id="contact-phone" placeholder="0526046636, 0527673518" />
+            <button class="btn-gold" onclick="saveSettings()">שמור הגדרות</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // דמו נתונים
+    let dresses = {
+      women: [
+        { name: 'שמלת תחרה ורודה אלגנטית', size: '38', city: 'ירושלים', price: 350, img: 'https://images.pexels.com/photos/1488463/pexels-photo-1488463.jpeg?auto=compress&w=500&h=400&fit=crop' },
+        { name: 'שמלת ערב זהובה מפוארת', size: '40', city: 'בני ברק', price: 400, img: 'https://images.pexels.com/photos/532220/pexels-photo-532220.jpeg?auto=compress&w=500&h=400&fit=crop' }
+      ],
+      girls: [
+        { name: 'שמלת פרחים לילדה', size: '30', city: 'מודיעין', price: 180, img: 'https://images.pexels.com/photos/459301/pexels-photo-459301.jpeg?auto=compress&w=500&h=400&fit=crop' }
+      ],
+      teens: [
+        { name: 'שמלת ערב לנערה אלגנטית', size: '36', city: 'חיפה', price: 250, img: 'https://images.pexels.com/photos/1707828/pexels-photo-1707828.jpeg?auto=compress&w=500&h=400&fit=crop' }
+      ]
+    };
+    let sales = [
+      { name: 'שמלה חדשה קלאסית', desc: 'שמלה חדשה בעיצוב יוקרתי', size: '38', price: 690, img: 'https://images.pexels.com/photos/532220/pexels-photo-532220.jpeg?auto=compress&w=500&h=400&fit=crop', gallery: [] },
+      { name: 'שמלה יד 2', desc: 'שמלה שמורה ונקייה', size: '36', price: 340, img: 'https://images.pexels.com/photos/1488463/pexels-photo-1488463.jpeg?auto=compress&w=500&h=400&fit=crop', gallery: [] }
+    ];
+    let petticoats = [
+      { name: 'תחתית מנפחת 3 חישוקים', desc: 'תחתית איכותית עם 3 חישוקים, מתאימה לכל שמלה יוקרתית', price: 120, img: 'https://images.pexels.com/photos/1707828/pexels-photo-1707828.jpeg?auto=compress&w=500&h=400&fit=crop' }
+    ];
+    let appointments = [];
+    let cart = [];
+    function showPage(page, el) {
+      ['home','catalog-women','catalog-teens','catalog-girls','sales','petticoats','contact','about'].forEach(id => {
+        const section = document.getElementById(id);
+        if (section) { section.classList.add('hide'); section.classList.remove('show'); }
+      });
+      if (document.getElementById(page)) {
+        document.getElementById(page).classList.remove('hide');
+        document.getElementById(page).classList.add('show');
+      }
+      document.querySelectorAll('nav .menu-link').forEach(a => a.classList.remove('active'));
+      if (el) el.classList.add('active');
+      if (page==='catalog-women'||page==='catalog-teens'||page==='catalog-girls') setTimeout(renderCatalogs,50);
+      if (page==='sales') setTimeout(renderSales,50);
+      if (page==='petticoats') setTimeout(renderPetticoats,50);
+    }
+    function renderCatalogs() {
+      ['women','girls','teens'].forEach(cat => {
+        let list = document.getElementById('catalog-list-'+cat);
+        if (!list) return;
+        list.innerHTML = '';
+        dresses[cat].forEach(dress => {
+          list.innerHTML += `<div class="catalog-card">
+            <img src="${dress.img}" alt="${dress.name}" loading="lazy" />
+            <h3>${dress.name}</h3>
+            <p><strong>מידה:</strong> ${dress.size}</p>
+            <p><strong>עיר:</strong> ${dress.city}</p>
+            <p class="price"><strong>מחיר:</strong> ₪${dress.price}</p>
+          </div>`;
+        });
+      });
+    }
+    function renderSales() {
+      let list = document.getElementById('sale-list');
+      if (!list) return;
+      list.innerHTML = '';
+      sales.forEach((item,i) => {
+        list.innerHTML += `<div class="sale-card">
+          <img src="${item.img}" alt="${item.name}" loading="lazy" />
+          <h3>${item.name}</h3>
+          <p><strong>מידה:</strong> ${item.size}</p>
+          <p class="price"><strong>מחיר:</strong> ₪${item.price}</p>
+          <button class="cart-btn" onclick="addToCart(${i})">הוספה לסל</button>
+          <button class="cart-btn" onclick="showSaleDetails(${i})">פרטים נוספים</button>
+        </div>`;
+      });
+      renderCart();
+    }
+    function showSaleDetails(i) {
+      let item = sales[i];
+      alert(
+        `שם: ${item.name}\nמידה: ${item.size}\nמחיר: ₪${item.price}\nתיאור: ${item.desc}\n${item.gallery.length?'יש תמונות נוספות':''}`
+      );
+    }
+    function addToCart(i) {
+      cart.push(sales[i]);
+      renderCart();
+    }
+    function renderCart() {
+      let cartBox = document.getElementById('cart-container');
+      if (!cartBox) return;
+      if (!cart.length) { cartBox.classList.add('hide'); return; }
+      cartBox.classList.remove('hide');
+      cartBox.innerHTML = '<h3>העגלה שלך</h3><div class="cart-list"></div>';
+      let list = cartBox.querySelector('.cart-list');
+      let total = 0;
+      cart.forEach((item, idx) => {
+        total += item.price;
+        list.innerHTML += `<div class="cart-list-item">
+          <img src="${item.img}" />
+          <div><strong>${item.name}</strong><br>מידה: ${item.size}<br>מחיר: ₪${item.price}</div>
+          <button class="cart-btn" onclick="removeFromCart(${idx})">הסר</button>
+        </div>`;
+      });
+      cartBox.innerHTML += `<div class="cart-total">סה"כ: ₪${total}</div>
+        <div class="cart-actions">
+          <button class="cart-pay-btn" onclick="payCart('paypal')">תשלום בפייפאל</button>
+          <button class="cart-pay-btn" onclick="payCart('credit')">תשלום באשראי</button>
+          <button class="cart-pay-btn" onclick="payCart('other')">תיאום תשלום</button>
+        </div>`;
+    }
+    function removeFromCart(idx) {
+      cart.splice(idx,1);
+      renderCart();
+    }
+    function payCart(method) {
+      alert('תודה על ההזמנה! ניצור קשר לאישור ותשלום.');
+      cart = [];
+      renderCart();
+    }
+    function renderPetticoats() {
+      let list = document.getElementById('petticoat-list');
+      if (!list) return;
+      list.innerHTML = '';
+      petticoats.forEach(item=>{
+        list.innerHTML += `<div class="catalog-card">
+          <img src="${item.img}" alt="${item.name}" loading="lazy" />
+          <h3>${item.name}</h3>
+          <p>${item.desc}</p>
+          <p class="price"><strong>מחיר:</strong> ₪${item.price}</p>
+        </div>`;
+      });
+    }
+    function showCalendar() {
+      document.getElementById('calendar').classList.add('show');
+    }
+    function bookAppointment(e) {
+      e.preventDefault();
+      let name = document.getElementById('calendar-name').value,
+          phone = document.getElementById('calendar-phone').value,
+          qty = document.getElementById('calendar-qty').value,
+          age = document.getElementById('calendar-age').value,
+          note = document.getElementById('calendar-note').value;
+      appointments.push({name,phone,qty,age,note,date:Date.now()});
+      alert('הבקשה נשלחה! נחזור אליך בהקדם.');
+      e.target.reset();
+      document.getElementById('calendar').classList.remove('show');
+    }
+    function sendContact(e) {
+      e.preventDefault();
+      let submitBtn = document.getElementById('contact-submit'),
+          originalText = submitBtn.innerHTML;
+      submitBtn.innerHTML = 'שולח...';
+      submitBtn.disabled = true;
+      setTimeout(() => {
+        alert('ההודעה נשלחה בהצלחה! נחזור אליך בקרוב.');
+        e.target.reset();
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+      }, 1500);
+    }
+    function showDashboard() {
+      document.getElementById('dashboardPanel').style.display='block';
+      document.getElementById('dashboard-login').style.display='block';
+      document.getElementById('dashboard-tabs').style.display='none';
+    }
+    function hideDashboard() {
+      document.getElementById('dashboardPanel').style.display='none';
+    }
+    function dashboardLogin() {
+      let pass = document.getElementById('dashboard-password').value;
+      if (pass === '2468') {
+        document.getElementById('dashboard-login').style.display='none';
+        document.getElementById('dashboard-tabs').style.display='block';
+        showDashboardTab('catalog');
+      } else {
+        alert('סיסמה שגויה');
+      }
+    }
+    function showDashboardTab(tabName) {
+      document.querySelectorAll('.dashboard-section').forEach(section=>{
+        section.classList.remove('active');
+      });
+      document.querySelectorAll('.dashboard-tab').forEach(tab=>{
+        tab.classList.remove('active');
+      });
+      document.getElementById('dashboard-'+tabName).classList.add('active');
+      event.target.classList.add('active');
+      if(tabName==='catalog') loadCategoryDresses();
+      if(tabName==='sales') loadSalesList();
+      if(tabName==='petticoats') loadPetticoatsList();
+      if(tabName==='calendar') loadAppointmentsList();
+    }
+    function loadCategoryDresses() {
+      let category = document.getElementById('edit-category').value;
+      let dressesList = document.getElementById('dresses-list');
+      dressesList.innerHTML = '';
+      dresses[category].forEach((dress, index) => {
+        dressesList.innerHTML += `
+          <div class="catalog-card">
+            <img src="${dress.img}" alt="${dress.name}" />
+            <h3>${dress.name}</h3>
+            <p>מידה: ${dress.size} | עיר: ${dress.city} | מחיר: ₪${dress.price}</p>
+            <button class="btn-gold" onclick="editDress('${category}',${index})">ערוך</button>
+            <button class="btn-gold" onclick="deleteDress('${category}',${index})">מחק</button>
+          </div>`;
+      });
+      dressesList.innerHTML += `<button class="btn-gold" onclick="addDress('${category}')">הוספת שמלה</button>`;
+    }
+    function editDress(category, index) {
+      let dress = dresses[category][index];
+      let newName = prompt('שם השמלה:', dress.name);
+      let newSize = prompt('מידה:', dress.size);
+      let newCity = prompt('עיר:', dress.city);
+      let newPrice = prompt('מחיר:', dress.price);
+      let newImg = prompt('קישור לתמונה:', dress.img);
+      if (newName && newSize && newCity && newPrice) {
+        dresses[category][index] = {
+          name: newName,
+          size: newSize,
+          city: newCity,
+          price: parseInt(newPrice),
+          img: newImg || dress.img
+        };
+        loadCategoryDresses();
+        renderCatalogs();
+      }
+    }
+    function deleteDress(category, index) {
+      if (confirm('האם למחוק?')) {
+        dresses[category].splice(index, 1);
+        loadCategoryDresses();
+        renderCatalogs();
+      }
+    }
+    function addDress(category) {
+      let name = prompt('שם השמלה:');
+      let size = prompt('מידה:');
+      let city = prompt('עיר:');
+      let price = prompt('מחיר:');
+      let img = prompt('קישור לתמונה:');
+      if (name && size && city && price) {
+        dresses[category].push({ name, size, city, price:parseInt(price), img:img||'' });
+        loadCategoryDresses();
+        renderCatalogs();
+      }
+    }
+    function loadSalesList() {
+      let list = document.getElementById('sales-list');
+      list.innerHTML = '';
+      sales.forEach((item,index)=>{
+        list.innerHTML += `<div class="catalog-card">
+            <img src="${item.img}" alt="${item.name}" />
+            <h3>${item.name}</h3>
+            <p>מידה: ${item.size} | מחיר: ₪${item.price}</p>
+            <button class="btn-gold" onclick="editSale(${index})">ערוך</button>
+            <button class="btn-gold" onclick="deleteSale(${index})">מחק</button>
+        </div>`;
+      });
+    }
+    function addSaleItem() {
+      let name = prompt('שם השמלה:');
+      let desc = prompt('תיאור השמלה:');
+      let size = prompt('מידה:');
+      let price = prompt('מחיר:');
+      let img = prompt('קישור לתמונה:');
+      if (name && desc && size && price) {
+        sales.push({ name, desc, size, price:parseInt(price), img:img||'', gallery:[] });
+        loadSalesList();
+        renderSales();
+      }
+    }
+    function editSale(index) {
+      let item = sales[index];
+      let newName = prompt('שם:',item.name);
+      let newDesc = prompt('תיאור:',item.desc);
+      let newSize = prompt('מידה:',item.size);
+      let newPrice = prompt('מחיר:',item.price);
+      let newImg = prompt('תמונה:',item.img);
+      if (newName && newDesc && newSize && newPrice) {
+        sales[index] = { name:newName, desc:newDesc, size:newSize, price:parseInt(newPrice), img:newImg||item.img, gallery:item.gallery };
+        loadSalesList();
+        renderSales();
+      }
+    }
+    function deleteSale(index) {
+      if(confirm('האם למחוק?')) {
+        sales.splice(index,1);
+        loadSalesList();
+        renderSales();
+      }
+    }
+    function loadPetticoatsList() {
+      let list = document.getElementById('petticoats-list');
+      list.innerHTML = '';
+      petticoats.forEach((item,index)=>{
+        list.innerHTML += `<div class="catalog-card">
+          <img src="${item.img}" alt="${item.name}" />
+          <h3>${item.name}</h3>
+          <p>${item.desc}</p>
+          <p class="price">₪${item.price}</p>
+          <button class="btn-gold" onclick="editPetticoat(${index})">ערוך</button>
+          <button class="btn-gold" onclick="deletePetticoat(${index})">מחק</button>
+        </div>`;
+      });
+    }
+    function addPetticoat() {
+      let name = prompt('שם התחתית:');
+      let desc = prompt('תיאור:');
+      let price = prompt('מחיר:');
+      let img = prompt('קישור לתמונה:');
+      if (name && desc && price) {
+        petticoats.push({ name, desc, price:parseInt(price), img:img||'' });
+        loadPetticoatsList();
+        renderPetticoats();
+      }
+    }
+    function editPetticoat(index) {
+      let item = petticoats[index];
+      let newName = prompt('שם:',item.name);
+      let newDesc = prompt('תיאור:',item.desc);
+      let newPrice = prompt('מחיר:',item.price);
+      let newImg = prompt('תמונה:',item.img);
+      if (newName && newDesc && newPrice) {
+        petticoats[index] = { name:newName, desc:newDesc, price:parseInt(newPrice), img:newImg||item.img };
+        loadPetticoatsList();
+        renderPetticoats();
+      }
+    }
+    function deletePetticoat(index) {
+      if(confirm('האם למחוק?')) {
+        petticoats.splice(index,1);
+        loadPetticoatsList();
+        renderPetticoats();
+      }
+    }
+    function loadAppointmentsList() {
+      let list = document.getElementById('appointments-list');
+      list.innerHTML = '';
+      appointments.forEach(app=>{
+        list.innerHTML += `<div>
+          <strong>${app.name}</strong> | טלפון: ${app.phone} | כמות: ${app.qty} | גילאים: ${app.age}<br>
+          הערות: ${app.note}<br>
+          <small>${new Date(app.date).toLocaleString()}</small>
+        </div><hr>`;
+      });
+    }
+    function saveSettings() {
+      alert('ההגדרות נשמרו!');
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+      showPage('home', document.querySelector('nav .menu-link'));
+    });
+  </script>
+</body>
+</html>
